@@ -12,12 +12,16 @@
                   <p class="card-text">{{ i.description }}</p>
                 </div>
                 <div class="card-footer">
-                  <a href="#" class="btn btn-primary">Xem</a>
+                  <a href="{% url 'stream' i.id %}" class="btn btn-primary">Xem</a>
 
                 </div>
               </div>
         </div>
         {% endfor %}
     </div>
+
+
+
+
 </div>
 {% endblock %}

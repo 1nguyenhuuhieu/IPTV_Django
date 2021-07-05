@@ -9,4 +9,5 @@ urlpatterns = [
     path('register/', views.register_iptv, name='register'),
     path('profile/', views.profile, name='profile'),
     path('group/', views.group, name='group'),
+    path('stream/<int:stream_id>/', views.stream, name='stream'),
 ]

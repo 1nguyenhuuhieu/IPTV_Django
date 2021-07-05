@@ -65,3 +65,10 @@ def group(request):
     }
 
     return render(request, 'group.html', context)
+
+def stream(request, stream_id):
+    stream = Stream.objects.get(id=stream_id)
+    context = {
+        'stream': stream
+    }
+    return render(request, 'stream.html', context)
