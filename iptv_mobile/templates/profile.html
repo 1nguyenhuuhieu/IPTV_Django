@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 py-4">
+            <h5>Thông tin tài khoản</h5>
+            <ul>
+                <li>Tài khoản: {{ request.user.username}}</li>
+                <li>Ngày tạo: {{ request.user.date_joined }} </li>
+                <li>Thuê bao: 
+                    {% for i in membership %}
+                    {{ i.group }}
+                    {% endfor %}
+                </li>
+                <li>Ngày đăng ký:
+                    {% for i in membership %}
+                    {{ i.start_date }}
+                    {% endfor %}
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

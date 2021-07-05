@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <div class="row mt-4">
+        <h5 class="mb-3"><i class="bi bi-star-fill me-2"></i>Tất cả kênh</h5>
+        {% for i in stream %}
+        <div class="col-6 mb-4">
+            <div class="card shadow-sm h-100 " >
+                <img src="{{ i.cover.url }}" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">{{ i.title }}</h5>
+                  <p class="card-text">{{ i.description }}</p>
+                </div>
+                <div class="card-footer">
+                  <a href="#" class="btn btn-primary">Xem</a>
+
+                </div>
+              </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
