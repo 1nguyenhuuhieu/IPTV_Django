@@ -1,11 +1,63 @@
 {% extends 'base.html' %}
+{% load humanize %}
 {% block content %}
 <div class="container">
     <div class="row py-3 justify-content-center">
-        <div class="col-8 ">
-           {% for i in group %}
 
-           {{i}}
+        {% if messages  %}
+        {% for message in messages %}
+        <h5 class="text-danger">
+        {{ message }}
+
+        </h5>
+        {% endfor %}
+        {% endif %}
+
+        <div class="col-lg-6 ">
+
+           {% for i in group %}
+           <div class="card mb-4">
+            <div class="card-header">
+              Thuê bao
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">{{ i.title }}</h5>
+              
+              {{ i.price|intcomma }} đồng / tháng
+              <p class="card-text">Kênh({{ i.stream_list|length }}): {% for j in i.stream_list %}
+                {{ j }}
+                {% if not forloop.last %} ,{% endif %}
+                {% endfor %}</p>
+
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal{{i.id}}">
+                    Đăng Ký
+                </button>
+                
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal{{i.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog ">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Thanh toán</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                        Bạn đang thực hiện thanh toán {{ i.price|intcomma }} đồng cho gói thuê bao: {{ i.title }} vào tài khoản {{ request.user.username }}.
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                       <a href="{% url 'confirm' i.id %}"  class="btn btn-primary">Thanh toán</a>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+
+
+            </div>
+          </div>
+
+     
            {% endfor %}
 
 

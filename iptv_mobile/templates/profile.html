@@ -5,13 +5,19 @@
     <div class="row justify-content-center">
         <div class="col-lg-8 py-4">
             <h5>Thông tin tài khoản</h5>
+            {% if messages  %}
+            {% for message in messages %}
+            <h5 class="text-success">
+            {{ message }}
+
+            </h5>
+            {% endfor %}
+            {% endif %}
             <ul>
                 <li>Tài khoản: {{ request.user.username}}</li>
                 <li>Ngày tạo: {{ request.user.date_joined }} </li>
                 <li>Thuê bao: 
-                    {% for i in membership %}
-                    {{ i.group }}
-                    {% endfor %}
+                    {{ membership.0.group }}
                 </li>
                 <li>Ngày đăng ký:
                     {% for i in membership %}
@@ -19,6 +25,11 @@
                     {% endfor %}
                 </li>
             </ul>
+
+            {% if membership %}
+
+            <a href="{% url 'ungroup' membership.0.group.id %}" class="btn btn-danger">Hủy đăng ký thuê bao</a>
+            {% endif %}
 
         </div>
     </div>

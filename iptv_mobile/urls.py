@@ -10,4 +10,6 @@ urlpatterns = [
     path('profile/', views.profile, name='profile'),
     path('group/', views.group, name='group'),
     path('stream/<int:stream_id>/', views.stream, name='stream'),
+    path('confirm/<int:group_id>/', views.confirm, name='confirm'),
+    path('ungroup/<int:group_id>/', views.ungroup, name='ungroup'),
 ]

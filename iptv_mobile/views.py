@@ -9,10 +9,21 @@ from .models import *
 
 @login_required(login_url='/login/')
 def index(request):
-    stream = Stream.objects.all()
-    context = {
-        'stream': stream
+    stream = Stream.objects.filter(
+        group__membership__user=request.user
+    )
+    try:
+        group = Group.objects.get(
+            membership__user=request.user
+        )
+        context = {
+        'stream': stream,
+        'group': group
     }
+    except:
+        context = {}
+ 
+  
     return render(request, 'index.html', context)
 
 def login_iptv(request):
@@ -72,3 +83,28 @@ def stream(request, stream_id):
         'stream': stream
     }
     return render(request, 'stream.html', context)
+def confirm(request, group_id):
+    user = User.objects.get(username=request.user)
+    group = Group.objects.get(id=group_id)
+    new_membership = Membership(user=user, group=group)
+    try:
+        new_membership.save()
+        messages.success(request, 'Đăng ký thuê bao thành công')
+        return redirect('profile')
+    except:
+        messages.warning(request, 'Đăng ký thuê bao lỗi')
+        return redirect('group')
+
+def ungroup(request, group_id):
+    user = User.objects.get(username=request.user)
+    group = Group.objects.get(id=group_id)
+    group = Group.objects.get(id=group_id)
+    membership = Membership.objects.get(user=user, group=group)
+    try:
+        membership.delete()
+        messages.success(request, 'Hủy đăng ký thuê bao thành công')
+        return redirect ('profile')
+    except:
+        messages.warning(request, 'Hủy đăng ký thuê bao không thành công')
+        return redirect ('profile')
+

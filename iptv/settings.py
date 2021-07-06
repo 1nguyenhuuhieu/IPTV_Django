@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-phgg($-_!v5anysvj8-6(7$n1yylq@rpfd%_dz$(+o6&cad2rs
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.1.107']
+ALLOWED_HOSTS = ['192.168.1.107', '127.0.0.1']
 
 
 # Application definition
@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
     'iptv_mobile'
 ]
 
@@ -104,7 +105,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = 'vi-vn'
+LANGUAGE_CODE = 'en-US'
 
 TIME_ZONE = 'Asia/Ho_Chi_Minh'
 

@@ -2,7 +2,12 @@
 {% block content %}
 <div class="container">
     <div class="row mt-4">
-        <h5 class="mb-3"><i class="bi bi-star-fill me-2"></i>Tất cả kênh</h5>
+      {% if group %}
+        <h5 class="mb-3"><i class="bi bi-star-fill me-2"></i>Kênh trong gói thuê bao: {{ group }}</h5>
+        {% else %}
+        <h5 class="mb-3 text-danger">Tài khoản {{ request.user }} chưa đăng ký gói thuê bao nào.</h5>
+
+        {% endif %}
         {% for i in stream %}
         <div class="col-6 mb-4">
             <div class="card shadow-sm h-100 " >
